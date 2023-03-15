@@ -15,6 +15,7 @@ admin_name = "\033[31madmin\033[0m"
 c.execute("SELECT * FROM users WHERE name=?", (admin_name,))
 if c.fetchone() is None:
     c.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)", ("127.0.0.1", admin_name, 1000, 0, 0, 0))
+    c.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)", (str(socket.gethostbyname(socket.gethostname())), admin_name, 1000, 0, 0, 0))
     conn.commit()
 
 lobby = Lobby(c, conn)
